@@ -97,7 +97,15 @@ sub edit {
 		# Change this to execute the editor.
 		if ($num == $this) {
 			close (IN);
-			exec "$EDITOR +$line $path$file"
+
+			# Call syntax depends on the editor.
+			if ($EDITOR =~ /subl.*/) {
+				$args = "$path$file:$line"
+			} else {
+				$args = "+$line $path$file"
+			}
+
+			exec "$EDITOR $args"
 		}
 	}
 }
