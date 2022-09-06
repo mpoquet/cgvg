@@ -101,6 +101,8 @@ sub edit {
 			# Call syntax depends on the editor.
 			if ($EDITOR =~ /subl.*/) {
 				$args = "$path$file:$line"
+			} elsif ($EDITOR =~ /code.*/) {
+				$args = "--goto $path$file:$line"
 			} else {
 				$args = "+$line $path$file"
 			}
